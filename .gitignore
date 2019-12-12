@@ -1,0 +1,13 @@
+.history
+.env
+dist
+node_modules
+logs
+pacts
+.DS_Store
+.vscode
+coverage
+*.log
+junit.xml
+__testdata__
+bin

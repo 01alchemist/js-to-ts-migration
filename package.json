@@ -1,0 +1,53 @@
+{
+  "name": "js-to-ts",
+  "version": "1.0.0",
+  "description": "Js to Ts migration tool",
+  "author": "Nidin Vinayakan",
+  "private": true,
+  "bin": {
+    "migrate": "./cli/migrate"
+  },
+  "scripts": {
+    "########################## PRODUCTION START ##########################": "",
+    "start": "NODE_ENV=production node ./bin/main.js",
+    "########################## BUILD ##########################": "",
+    "build": "NODE_ENV=production webpack",
+    "########################## DEVELOPMENT ##########################": "",
+    "watch": "NODE_ENV=development webpack --watch",
+    "dev": "NODE_ENV=development node --inspect ./bin/main.js",
+    "########################## TEST ##########################": "",
+    "test": "jest",
+    "tdd": "jest --watch"
+  },
+  "lint-staged": {
+    "*.{ts}": "tslint"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "dependencies": {
+    "chalk": "^3.0.0"
+  },
+  "devDependencies": {
+    "@types/jest": "^24.0.23",
+    "@types/node": "^12.12.14",
+    "clean-webpack-plugin": "^3.0.0",
+    "copy-webpack-plugin": "^5.1.0",
+    "fs-extra": "^8.1.0",
+    "husky": "^2.6.0",
+    "jest": "^24.1.0",
+    "lint-staged": "^8.2.1",
+    "prettier": "^1.19.1",
+    "ts-jest": "^24.2.0",
+    "ts-loader": "^6.2.1",
+    "tslint": "^5.20.1",
+    "tslint-config-prettier": "^1.18.0",
+    "tslint-loader": "^3.5.4",
+    "typescript": "~3.5.3",
+    "webpack": "^4.41.2",
+    "webpack-cli": "^3.3.10",
+    "webpack-node-externals": "^1.7.2"
+  }
+}

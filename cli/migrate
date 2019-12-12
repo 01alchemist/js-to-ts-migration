@@ -1,0 +1,4 @@
+#!/usr/bin/env node
+
+const migrateMain = require("../bin/main.js")
+migrateMain()

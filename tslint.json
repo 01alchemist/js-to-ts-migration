@@ -1,0 +1,12 @@
+{
+  "extends": [
+    "tslint-config-prettier"
+  ],
+  "rules": {
+    "variable-name": false,
+    "no-increment-decrement": false
+  },
+  "jsRules": {
+    "no-empty": true
+  }
+}
