@@ -17,16 +17,22 @@ async function migrateFile(jsPath: string) {
     fs.readFile(jsPath, (err: NodeJS.ErrnoException | null, data: Buffer) => {
       if (err) {
         console.log("[read error]: " + jsPath);
-
         return reject(err);
       }
       const jsCode = migrate(data.toString());
-      fs.writeFile(tsPath, jsCode, (err: NodeJS.ErrnoException | null) => {
+
+      fs.rename(jsPath, tsPath, (err: NodeJS.ErrnoException | null) => {
         if (err) {
-          console.log("[write error]: " + tsPath);
+          console.log("[delete error]: " + jsPath);
           return reject(err);
         }
-        resolve();
+        fs.writeFile(tsPath, jsCode, (err: NodeJS.ErrnoException | null) => {
+          if (err) {
+            console.log("[write error]: " + tsPath);
+            return reject(err);
+          }
+          resolve();
+        });
       });
     });
   });
@@ -37,6 +43,10 @@ async function migrateFiles(jsFiles: string[]) {
 }
 
 async function migrateDir(inputDir: string) {
+  console.log("-------------------------------------------------");
+  console.log(`- Processing: ${inputDir}`);
+  console.log("-------------------------------------------------");
+
   const files = fs.readdirSync(inputDir, { withFileTypes: true });
   const jsFiles: string[] = [];
   const dirs: string[] = [];
@@ -47,8 +57,8 @@ async function migrateDir(inputDir: string) {
       dirs.push(`${inputDir}/${file.name}`);
     }
   });
-  console.log(jsFiles);
   await migrateFiles(jsFiles);
+  await Promise.all(dirs.map(dir => migrateDir(dir)));
 }
 
 const [inputDir] = process.argv.slice(2);

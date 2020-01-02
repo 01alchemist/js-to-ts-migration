@@ -9,5 +9,4 @@ pacts
 coverage
 *.log
 junit.xml
-__testdata__
 bin

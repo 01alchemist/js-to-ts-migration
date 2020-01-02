@@ -5,7 +5,6 @@ const chalk = require("chalk");
 const webpack = require("webpack");
 const nodeExternals = require("webpack-node-externals");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
-const CopyWebpackPlugin = require("copy-webpack-plugin");
 
 const pkg = require("./package.json");
 const tsConfig = require("./tsconfig.json");
@@ -115,18 +114,7 @@ module.exports = {
     }),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoEmitOnErrorsPlugin(),
-    new webpack.NamedModulesPlugin(),
-    new CopyWebpackPlugin(
-      [
-        {
-          from: "./app/index.html",
-          to: "index.html"
-        }
-      ],
-      {
-        ignore: ["*.ts"]
-      }
-    )
+    new webpack.NamedModulesPlugin()
   ],
   module: {
     rules: [
@@ -134,13 +122,13 @@ module.exports = {
         test: /\.tsx?$/,
         loader: "ts-loader",
         exclude: /node_modules/
-      },
-      {
-        enforce: "pre",
-        test: /\.(ts)$/,
-        loader: "tslint-loader",
-        exclude: /(node_modules)/
       }
+      // {
+      //   enforce: "pre",
+      //   test: /\.(ts)$/,
+      //   loader: "tslint-loader",
+      //   exclude: /(node_modules)/
+      // }
     ]
   },
   output: {
