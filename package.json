@@ -28,7 +28,8 @@
     }
   },
   "dependencies": {
-    "chalk": "^3.0.0"
+    "chalk": "^3.0.0",
+    "tslib": "2.0.3"
   },
   "devDependencies": {
     "@types/jest": "^24.0.23",
